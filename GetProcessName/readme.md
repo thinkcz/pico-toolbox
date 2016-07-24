@@ -1,5 +1,5 @@
-========================================================================
-    Getting name of  PICO process (bash, init, etc.)
+
+Getting name of  PICO process (bash, init, etc.)
 ========================================================================
 
 This is currently the only way how to get meaningful name of PICO process,
