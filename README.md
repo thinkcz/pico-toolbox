@@ -1,5 +1,4 @@
-========================================================================
-    pico-toolbox and ultimate tool for PICO processes and providers
+pico-toolbox and ultimate tool for PICO processes and providers
 ========================================================================
 
 Formely MS DrawBridge research project, evolved to real use in Windows 10,
