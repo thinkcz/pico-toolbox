@@ -1,0 +1,90 @@
+;
+; picodrv.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=picodrv.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+picodrv.sys  = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%picodrv.DeviceDesc%=picopoc_Device, Root\picodrv ; TODO: edit hw-id
+
+[picopoc_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+picodrv.sys
+
+;-------------- Service installation
+[picopoc_Device.NT.Services]
+AddService = picodrv,%SPSVCINST_ASSOCSERVICE%, picopoc_Service_Inst
+
+; -------------- picodrv driver install sections
+[picopoc_Service_Inst]
+DisplayName    = %picodrv.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 0               ; SERVICE_BOOT_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\picodrv.sys
+
+;
+;--- picopoc_Device Coinstaller installation ------
+;
+
+[DestinationDirs]
+picopoc_Device_CoInstaller_CopyFiles = 11
+
+[picopoc_Device.NT.CoInstallers]
+AddReg=picopoc_Device_CoInstaller_AddReg
+CopyFiles=picopoc_Device_CoInstaller_CopyFiles
+
+[picopoc_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[picopoc_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[SourceDisksFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+[picopoc_Device.NT.Wdf]
+KmdfService =  picodrv, picopoc_wdfsect
+[picopoc_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "picodrv Installation Disk"
+picodrv.DeviceDesc = "picodrv Device"
+picodrv.SVCDESC = "picodrv Service"
