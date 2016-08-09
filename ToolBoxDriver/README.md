@@ -5,7 +5,7 @@ an ultimate tool for PICO processes and providers
 
 This is kernel part of pico-toolbox, it contains various tools coupled with
 their UM counterparts. Driver is x64 only, and you need to turn on
-TestSigning option through BCD on windows.
+TestSigning option through BCD on windows and of course attach debugger unless you want to see PatchGuard BSOD.
 
 
 
