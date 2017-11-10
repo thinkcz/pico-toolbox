@@ -4,7 +4,7 @@ an ultimate tool for PICO processes and providers
 
 
 Formely MS DrawBridge research project, evolved to real use in Windows 10,
-Everybody wonders how does the Linux for Windows works ? 
+Everybody wonder how does the Linux for Windows works ? 
 .... PICO process & PICO provider is the answer.
 
 This repository will record my research attempts in field of PICO
